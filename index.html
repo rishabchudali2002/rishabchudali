@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishab | CSIT Student Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: linear-gradient(to right, #e3ffe7, #d9e7ff);
+      --text: #2c3e50;
+      --header: linear-gradient(to right, #049172, #1aae9c);
+      --hero: linear-gradient(135deg, #43cea2, #185a9d);
+      --cta-bg: white;
+      --cta-text: #185a9d;
+      --card-bg: #ffffffcc;
+    }
+
+    body.dark-mode {
+      --bg: linear-gradient(to right, #141e30, #243b55);
+      --text: #5b8304;
+      --header: linear-gradient(to right, #000000, #000000);
+      --hero: linear-gradient(135deg, #141e30, #243b55);
+      --cta-bg: #ecf0f1;
+      --cta-text: #141e30;
+      --card-bg: #2c3e50cc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.5s, color 0.5s;
+      animation: backgroundShift 10s infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0%; }
+      100% { background-position: 100%; }
+    }
+
+    header {
+      background: var(--header);
+      background-size: 200% 200%;
+      padding: 1rem 2rem;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: backgroundAnimation 10s ease infinite, slideDown 1s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes backgroundAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #f1c40f;
+    }
+
+    .toggle-btn {
+      background: #fff;
+      color: #111;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero {
+      padding: 4rem 2rem;
+      background: var(--hero);
+      background-size: 200% 200%;
+      color: white;
+      text-align: center;
+      animation: heroBackgroundShift 15s ease infinite, fadeInScale 1.2s ease;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: 2rem auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    @keyframes heroBackgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .cta, .cv-btn {
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: inline-block;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+
+    .cta:hover, .cv-btn:hover {
+      opacity: 0.8;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .typing {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      min-height: 1.5em;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .skill {
+      background: #f1c40f;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #333;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+
+    .skill:hover {
+      transform: scale(1.1);
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    button {
+      background: #2ecc71;
+      border: none;
+      padding: 0.75rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #27ae60;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--header);
+      color: white;
+      margin-top: 3rem;
+      font-weight: 500;
+    }
+
+    .social-icons {
+      margin-top: 0.5rem;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #f1c40f;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      .skill-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .toggle-btn {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Rishab Dev Chudali</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero" data-aos="fade-up">
+    <h2>Welcome to My Portfolio</h2>
+    <p class="typing"></p>
+    <a href="#contact" class="cta">Hire Me</a>
+    <br />
+    <button class="cv-btn" onclick="downloadCV()">Download CV</button>
+  </section>
+
+  <section id="about" data-aos="fade-right">
+    <h2>About Me</h2>
+    <p>I am a BSc CSIT student at New Summit College, affiliated with Tribhuvan University. I have a strong passion for web development and programming. I am skilled in HTML, CSS, JavaScript, PHP, Python, and GitHub.</p>
+  </section>
+
+  <section id="skills" data-aos="zoom-in">
+    <h2>Technical Skills</h2>
+    <div class="skill-list">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">PHP</div>
+      <div class="skill">Python</div>
+      <div class="skill">Git & GitHub</div>
+      <div class="skill">MY SQL</div>
+
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-left">
+    <h2>My Projects</h2>
+    <div class="project-card" onclick="showDetails('portfolio')">
+      <h3>Personal Portfolio</h3>
+      <p>Responsive portfolio website with animations.</p>
+    </div>
+    <div id="project-details-portfolio" style="display:none; background:#fff; padding:1rem; border-radius:10px; margin-top:1rem;"></div>
+
+    <div class="project-card" onclick="showDetails('blog')">
+      <h3>PHP Blog</h3>
+      <p>Sampada Navigator system using PHP and MySQL.</p>
+    </div>
+    <div id="project-details-blog" style="display:none; background:#fff; padding:1rem; border-radius:10px; margin-top:1rem;"></div>
+
+    <div class="project-card" onclick="showDetails('raithane')">
+      <h3>Raithane Food Ordering System</h3>
+      <p>Online system to order local Nepali food like dhido, sisno curry, etc.</p>
+    </div>
+    <div id="project-details-raithane" style="display:none; background:#fff; padding:1rem; border-radius:10px; margin-top:1rem;"></div>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2>Contact Me</h2>
+    <form id="contactForm" action="send_mail.php" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formResponse" style="margin-top:1rem;color:green;"></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Rishab Dev Chudali | </p>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/rishab-chudali-153323265/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/rishabchudali2002" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.facebook.com/photo/?fbid=1509698902533547&set=a.140373579466093" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    const typingText = [
+      "BSc CSIT Student",
+      "Web Developer",
+      "JavaScript & PHP Programmer",
+      "Python Enthusiast",
+      "Open Source Contributor"
+    ];
+
+    let index = 0;
+    let charIndex = 0;
+    const typingEl = document.querySelector(".typing");
+
+    function type() {
+      if (charIndex < typingText[index].length) {
+        typingEl.textContent += typingText[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typingEl.textContent = typingText[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        index = (index + 1) % typingText.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typingText.length) type();
+    });
+
+    function showDetails(project) {
+      const allDetails = document.querySelectorAll('[id^="project-details"]');
+      allDetails.forEach(el => el.style.display = "none");
+
+      const detailsMap = {
+        portfolio: "This is a modern, responsive personal portfolio built with HTML, CSS, JS, including dark mode and animations.",
+        blog: "A full-featured web system built with PHP and MySQL to browse heritage sites and book tourist guides.",
+        raithane: "Raithane food ordering system allows users to order traditional Nepali foods like dhido and sisno curry."
+      };
+
+      const container = document.getElementById(`project-details-${project}`);
+      container.style.display = "block";
+      container.innerText = detailsMap[project];
+    }
+
+    function downloadCV() {
+      const cvFileName = 'Rishab_Dev_Chudali_CV.pdf';
+      const link = document.createElement('a');
+      link.href = cvFileName;
+      link.download = cvFileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const responseEl = document.getElementById('formResponse');
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.text())
+      .then(text => {
+        responseEl.style.color = 'green';
+        responseEl.textContent = text;
+        form.reset();
+      })
+      .catch(error => {
+        responseEl.style.color = 'red';
+        responseEl.textContent = 'Oops! Something went wrong.';
+      });
+    });
+  </script>
+</body>
+</html>
